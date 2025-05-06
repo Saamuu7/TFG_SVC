@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+
+<div class="header">
+    <label for="profile-upload">
+        <img src="https://via.placeholder.com/80" id="profile-pic" class="profile-img" alt="Foto de perfil">
+    </label>
+    <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+    <span class="user-name">{{ session['user_name'] }}</span>
+</div>
+
+<div class="container">
+    <div class="config-section">
+        <div class="config-title">Configuración</div>
+        <ul class="config-options">
+            <li class="config-option" data-target="account-details">Detalles cuenta</li>
+            <li class="config-option" data-target="payment-methods">Métodos de pago</li>
+            <li class="config-option" data-target="privacy-settings">Privacidad</li>
+            <li class="config-option" data-target="visibility-settings">Visibilidad</li>
+            <li class="logout-btn-li">
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit" class="logout-btn">Cerrar Sesión</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Secciones ocultas inicialmente -->
+    <div id="account-details" class="config-content">
+        <h3>Detalles de la cuenta</h3>
+        <form action="{{ url_for('update_account') }}" method="POST">
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" value="{{ usuario[1] }}" readonly>
+        
+            <label for="password">Contraseña:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" value="{{ usuario[2] }}" readonly>
+                <button type="button" id="toggle-password">👁️</button>
+            </div>
+        </form>
+        
+        <form action="{{ url_for('delete_account') }}" method="POST">
+            <button type="submit" class="delete-account-btn">Eliminar cuenta</button>
+        </form>
+    </div> 
+
+    <div id="payment-methods" class="config-content">
+        <h3>Métodos de pago</h3>
+        <ul id="payment-list"></ul>
+        <button id="add-payment-btn">Añadir método de pago</button>
+        <form id="payment-form" style="display: none;">
+            <label for="card-number">Número de tarjeta:</label>
+            <input type="text" id="card-number" name="card-number" maxlength="16" required>
+        
+            <label for="expiry-date">Fecha de caducidad:</label>
+            <input type="month" id="expiry-date" name="expiry-date" required>
+        
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" required>
+        
+            <button type="button" id="save-payment-btn">Guardar</button>
+        </form>
+        <div id="card-image-container" style="display: none;">
+            <button id="delete-btn" class="delete-payment-btn">Eliminar</button>
+        </div>
+    </div>
+
+    <div id="privacy-settings" class="config-content">
+        <h3>Privacidad</h3>
+        <form>
+            <label><input type="checkbox" name="data-sharing"> Rendimiento y analisis</label>
+            <label><input type="checkbox" name="email-notifications"> Experiencias personalizadas </label>
+            <label><input type="checkbox" name="email-notifications"> Publicidad personalizadas </label>
+            <label><input type="checkbox" name="email-notifications"> Publicidad personalizadas basada en tu perfil</label>
+            <button type="submit" class="btn-guardar-v-p">Guardar</button>
+        </form>
+    </div>
+
+    <div id="visibility-settings" class="config-content">
+        <h3>Visibilidad de evaluación de productos</h3>
+        <p>Selecciona cómo quieres aparecer en las evaluaciones de productos de Nike que hagas. Cambiar estos ajustes también afectará a tu visibilidad para conectar con tus amigos en la Nike Training Club App y la Nike Run Club App.</p>
+        <form>
+            <label><input type="radio" name="visibility" value="private"> Privado: solo tú puedes ver tu perfil</label><br>
+            <label><input type="radio" name="visibility" value="social"> Social: perfil visible para los amigos</label><br>
+            <label><input type="radio" name="visibility" value="public"> Público: todo el mundo puede ver el perfil</label><br>
+            
+            <h3>Compartir ubicación</h3>
+            <label><input type="radio" name="location" value="friends"> Compartir mi ubicación solo con mis amigos</label><br>
+            <label><input type="radio" name="location" value="none"> No compartir mi ubicación</label><br>
+            
+            <button type="submit" class="btn-guardar-v-p">Guardar</button>
+        </form>
+    </div>
+    
+</div>
+
+<script src="{{ url_for('static', filename='js/perfil.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carrito.css') }}">
+<body>
+    <div class="carrito-wrapper">
+        <!-- Columna de productos -->
+        <div class="carrito-productos">
+            <h1>Mi cesta</h1>
+            <hr>
+        </div>        
+
+        <!-- Columna de precios y descuento -->
+        <div class="carrito-detalles">
+            <!-- Caja de precios -->
+            <div class="carrito-precios">
+                <div class="linea">
+                    <span>Subtotal:</span>
+                    <span id="precio-carrito">0€</span>
+                </div>
+                <div class="linea">
+                    <span>Descuento:</span>
+                    <span id="descuento">0€</span>
+                </div>
+                
+                <div class="linea total">
+                    <span><strong>Total:</strong></span>
+                    <span id="precio-total"><strong>0€</strong></span>
+                </div>
+                
+
+                <a id="btn-finalizar-compra" href="{{ url_for('finalizar_compra') }}">Finalizar Compra</a>
+            </div>
+            
+            <!-- Caja de descuento -->
+            <div class="caja-descuento">
+                <input type="text" id="codigo-descuento" placeholder="Código de descuento">
+                <button id="btn-canjear">Aplicar Descuento</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
+
+{% endblock %}

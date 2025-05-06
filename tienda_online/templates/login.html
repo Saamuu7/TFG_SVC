@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  <title>Login</title>
+</head>
+<body>
+  <div class="wrapper">
+    <form action="{{ url_for('login') }}" method="POST" autocomplete="off">
+      <h2>Login</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+    <div class="input-field">
+      <input type="text" name="usuario_tienda" autocomplete="off" required>
+      <label>usuario</label>
+    </div>
+    <div class="input-field">
+      <input type="password" name="clave_tienda" autocomplete="off" required>  
+      <label>contraseña</label>
+    </div>
+    <div class="forget">
+      <label for="remember">
+        <input type="checkbox" id="remember">
+        <p>Recordar</p>
+      </label>
+    </div>
+    <button type="submit" class="btn">Iniciar sesión</button>
+    <div class="register">
+      <p>¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate</a></p>
+    </div>
+  </form>
+  </div>
+</body>
+</html>
