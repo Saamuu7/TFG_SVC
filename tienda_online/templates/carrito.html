@@ -8,6 +8,7 @@
         <div class="carrito-productos">
             <h1>Mi cesta</h1>
             <hr>
+            <div class="productos-lista"></div> <!-- Aquí se cargarán los productos -->
         </div>        
 
         <!-- Columna de precios y descuento -->
@@ -27,16 +28,15 @@
                     <span><strong>Total:</strong></span>
                     <span id="precio-total"><strong>0€</strong></span>
                 </div>
-                
 
                 <a id="btn-finalizar-compra" href="{{ url_for('finalizar_compra') }}">Finalizar Compra</a>
             </div>
             
             <!-- Caja de descuento -->
-            <div class="caja-descuento">
+            <!-- <div class="caja-descuento">
                 <input type="text" id="codigo-descuento" placeholder="Código de descuento">
                 <button id="btn-canjear">Aplicar Descuento</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
