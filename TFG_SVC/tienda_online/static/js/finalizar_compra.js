@@ -38,12 +38,75 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para actualizar el total del carrito
     function actualizarTotal(carrito) {
-        let total = 0;
+        let subtotal = 0;
         carrito.forEach(producto => {
-            total += producto.precio * producto.cantidad;
+            subtotal += producto.precio * producto.cantidad;
         });
-        document.getElementById('total-carrito').textContent = total.toFixed(2) + "€";
+    
+        // Obtener descuento desde localStorage o poner 0 si no existe
+        let descuentoPorcentaje = parseFloat(localStorage.getItem("descuentoAplicado")) || 0;
+        let descuento = subtotal * (descuentoPorcentaje / 100);
+        let totalFinal = subtotal - descuento;
+    
+        document.getElementById('total-carrito').textContent = totalFinal.toFixed(2) + "€";
     }
+
+    document.getElementById('pagar').addEventListener('click', function () {
+        localStorage.removeItem('descuentoAplicado');
+        // Aquí puedes redirigir o mostrar un mensaje de éxito
+    });
+    
+    
+    
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const radioTarjeta = document.getElementById('payment-method-card');
+    const radioPaypal = document.getElementById('payment-method-paypal');
+    const paypalFields = document.querySelector('.paypal-fields');
+    const tarjetaFields = document.querySelector('.tarjeta-fields');
+
+    function toggleCamposPago() {
+        if (radioTarjeta.checked) {
+            tarjetaFields.style.display = 'block';
+            paypalFields.style.display = 'none';
+        } else if (radioPaypal.checked) {
+            tarjetaFields.style.display = 'none';
+            paypalFields.style.display = 'block';
+        }
+    }
+
+    radioTarjeta.addEventListener('change', toggleCamposPago);
+    radioPaypal.addEventListener('change', toggleCamposPago);
+
+    // Inicializar al cargar la página
+    toggleCamposPago();
+});
+
+    //Para que aparezca el paypal
+document.addEventListener('DOMContentLoaded', () => {
+    const radioTarjeta = document.getElementById('payment-method-card');
+    const radioPaypal = document.getElementById('payment-method-paypal');
+    const paypalFields = document.querySelector('#paypal-fields');  // Corregido
+    const tarjetaFields = document.querySelector('#tarjeta-fields');  // Corregido
+
+    function toggleCamposPago() {
+        if (radioTarjeta.checked) {
+            tarjetaFields.style.display = 'block';
+            paypalFields.style.display = 'none';
+        } else if (radioPaypal.checked) {
+            tarjetaFields.style.display = 'none';
+            paypalFields.style.display = 'block';
+        }
+    }
+
+    radioTarjeta.addEventListener('change', toggleCamposPago);
+    radioPaypal.addEventListener('change', toggleCamposPago);
+
+    toggleCamposPago(); // Ejecutar al inicio
+});
+
+    
+
 
 

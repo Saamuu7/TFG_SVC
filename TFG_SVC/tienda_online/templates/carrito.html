@@ -22,16 +22,13 @@
                     <span>Descuento:</span>
                     <span id="descuento">0€</span>
                 </div>
-                
                 <div class="linea total">
                     <span><strong>Total:</strong></span>
                     <span id="precio-total"><strong>0€</strong></span>
                 </div>
-                
-
                 <a id="btn-finalizar-compra" href="{{ url_for('finalizar_compra') }}">Finalizar Compra</a>
             </div>
-            
+
             <!-- Caja de descuento -->
             <div class="caja-descuento">
                 <input type="text" id="codigo-descuento" placeholder="Código de descuento">
@@ -42,5 +39,4 @@
 </body>
 
 <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
-
 {% endblock %}

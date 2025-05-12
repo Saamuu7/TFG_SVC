@@ -178,3 +178,9 @@ body{
 #btn-canjear:hover {
     background-color: #5E6C84;
 }
+
+.item-cantidad button {
+    font-weight: bold;
+}
+
+

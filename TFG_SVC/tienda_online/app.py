@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mysqldb import MySQL
 from functools import wraps  # <- IMPORTANTE para login_required
-from models.modelos import Usuario, Tarjeta
+from models.modelos import Usuario, Tarjeta, Pago
 
 # Inicia Flask
 app = Flask(__name__)
@@ -154,6 +154,40 @@ def futbol():
     cur.close()
     return render_template('futbol.html', productos=productos_info)
 
+@app.route('/agregar_carrito/<int:producto_id>')
+@login_required
+def agregar_carrito(producto_id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT id, nombre, precio, talla, color, imagen FROM productos WHERE id = %s", (producto_id,))
+    producto = cur.fetchone()
+
+    # Si el producto ya está en el carrito, lo actualizamos
+    if 'carrito' not in session:
+        session['carrito'] = []
+    
+    carrito = session['carrito']
+    producto_encontrado = False
+    for item in carrito:
+        if item['id'] == producto[0]:
+            item['cantidad'] += 1
+            producto_encontrado = True
+            break
+
+    if not producto_encontrado:
+        carrito.append({
+            'id': producto[0],
+            'nombre': producto[1],
+            'precio': producto[2],
+            'talla': producto[3],
+            'color': producto[4],
+            'imagen': f"/static/img/{producto[5]}",
+            'cantidad': 1
+        })
+    
+    session['carrito'] = carrito
+    cur.close()
+    return redirect(url_for('futbol'))
+
 @app.route('/padel')
 @login_required
 def padel():
@@ -232,6 +266,30 @@ def finalizar_compra():
     carrito = request.cookies.get('carrito')
     return render_template('finalizar_compra.html', carrito=carrito)
 
-# Iniciar la aplicación
+@app.route('/pago_procesado')
+def pago_procesado():
+    return render_template('pago_procesado.html')
+
+@app.route('/procesar_pago', methods=['POST'])
+def procesar_pago():
+    if request.method == 'POST':
+        id_usuario = 1  # Obtén el ID del usuario de alguna manera (sesión o similar)
+        nombre = request.form['nombre']
+        correo = request.form['email']
+        direccion = request.form['direccion']
+        
+        # Llamamos a la clase Pago para agregar el pago
+        resultado, status_code = Pago.agregar_pago(id_usuario, nombre, correo, direccion)
+        
+        if resultado['success']:
+            # Si el pago fue exitoso, redirigimos al pago procesado y mostramos el ID del pago
+            id_pago = resultado['id_pago']  # Obtiene el ID del pago
+            return render_template('pago_procesado.html', id_pago=id_pago)
+        else:
+            # Si hubo un error, mostramos un mensaje de error
+            return render_template('error.html', mensaje=resultado['message'])
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
