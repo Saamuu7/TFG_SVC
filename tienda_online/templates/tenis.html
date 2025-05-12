@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/padel.css') }}">
+
+<h1>Tenis</h1>
+
+<div class="filtro-container">
+    <!-- Filtro desplegable -->
+    <select id="orden" onchange="ordenarProductos()">
+        <option value="">Ordenar por</option>
+        <option value="precio_asc">Precio más bajo</option>
+        <option value="precio_desc">Precio más alto</option>
+        <option value="nombre_az">Nombre A-Z</option>
+        <option value="nombre_za">Nombre Z-A</option>
+    </select>
+
+    <!-- Barra de búsqueda -->
+    <input type="text" id="busqueda" placeholder="Buscar..." onkeyup="filtrarProductos()">
+</div>
+
+<!-- Productos Container -->
+<div class="productos-container">
+    {% for producto in productos %}
+    <div class="producto">
+        <div class="producto-clickable" onclick="abrirModal('{{ producto.imagen }}', '{{ producto.nombre }}', '{{ producto.precio }}', '{{ producto.talla }}')">
+            <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="producto-img">
+            <h3>{{ producto.nombre }}</h3>
+            <p>{{ producto.precio }} €</p>
+        </div>
+        <button class="boton-compra" onclick="agregarAlCarrito('{{ producto.nombre }}', '{{ producto.precio }}', '{{ producto.talla }}', '{{ producto.imagen }}')">Añadir al carrito</button>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Modal -->
+<div id="miModal" class="modal" style="display: none;">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        <div class="modal-body" style="display: flex; justify-content: space-between;">
+            <!-- Parte izquierda: Imagen -->
+            <img id="modalImagen" src="" alt="Imagen Producto" class="modal-img" style="width: 50%; object-fit: cover;">
+            
+            <!-- Parte derecha: Información del producto -->
+            <div class="modal-info" style="width: 50%; padding-left: 20px;">
+                <h2 id="modalNombre"></h2>
+                <p><strong>Talla:</strong> <span id="modalTalla"></span></p>
+                <p><strong>Precio:</strong> <span id="modalPrecio"></span> €</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/padel.js') }}"></script>
+
+{% endblock %}

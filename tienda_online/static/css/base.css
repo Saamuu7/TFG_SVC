@@ -1,0 +1,168 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 20px; /* Ajuste para reducir el margen superior */
+}
+
+main {
+    padding-top: 109px; /* Ajustar según el tamaño del header */
+}
+
+/* Estilos del header */
+header {
+    background-color: #000000;
+    position: fixed; /* Hace que el header sea fijo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que el header esté por encima del contenido */
+    text-align: center;
+    padding: 10px 0;
+}
+
+.header-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between; /* Esto asegura que los elementos estén a los extremos */
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px; /* Reducir el margen superior */
+    padding: 0 20px; /* Esto agrega espacio entre los íconos y el borde */
+}
+
+.logo {
+    max-width: 150px;
+    margin-top: 0; /* Ajuste para elevar el logo */
+}
+
+.icon {
+    margin-top: 5px; /* Ajuste para mover el ícono de perfil más cerca de la parte superior */
+}
+
+.icon img {
+    width: 25px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 22px;
+    transition: transform 0.3s ease, color 0.3s ease; /* Agrega transición para un efecto suave */
+    position: relative;
+}
+
+nav ul li a, .footer ul a {
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    position: relative;
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+nav ul li a::before,
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #8D99AE;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+nav ul li a::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+nav ul li a::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+nav ul li a:hover, .footer ul a:hover {
+    color: #8D99AE;
+    opacity: 1;
+}
+
+nav ul li a:hover::before,
+nav ul li a:hover::after {
+    opacity: 1;
+}
+
+/* Estilos del footer */
+.footer {
+    padding: 40px 0;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.footer ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.footer li {
+    padding: 0 10px;
+}
+
+.footer ul a {
+    color: inherit;
+    opacity: 0.8;
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+.footer ul a:hover {
+    opacity: 1;
+}
+
+.footer .social {
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.footer .social > a {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin: 0 8px;
+    color: inherit;
+    opacity: 0.75;
+}
+
+.footer .social > a:hover {
+    opacity: 0.9;
+}
+
+.footer .social i {
+    font-size: 24px;
+}
+
+.footer .copyright {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #fafafa;
+    margin-bottom: 0;
+}

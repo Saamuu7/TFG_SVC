@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="{{ url_for('perfil') }}" class="icon">
+                <img src="{{ url_for('static', filename='img/perfil.png') }}" alt="Perfil" />
+            </a>
+            <a href="{{ url_for('inicio') }}">
+                <img src="{{ url_for('static', filename='img/Logo2.png') }}" alt="Logo" class="logo">
+            </a>
+            <a href="{{ url_for('carrito') }}" class="icon carrito-icono" style="position: relative;">
+                <img src="{{ url_for('static', filename='img/carrito.png') }}" alt="Icono" />
+                <span id="contador-carrito" style="
+                    position: absolute;
+                    top: -8px;
+                    right: -8px;
+                    background-color: red;
+                    color: white;
+                    font-size: 12px;
+                    padding: 2px 6px;
+                    border-radius: 50%;
+                    display: none;
+                ">0</span>
+            </a>
+        </div>
+    
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('futbol') }}">Fútbol</a></li>
+                <li><a href="{{ url_for('padel') }}">Padel</a></li>
+                <li><a href="{{ url_for('tenis') }}">Tenis</a></li>
+                <li><a href="{{ url_for('baloncesto') }}">Baloncesto</a></li>
+                <li><a href="{{ url_for('contactanos') }}">Contáctanos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <div class="footer">
+        <footer>
+            <div class="social">
+                <a href="#"><i class="ion-social-instagram"></i></a>
+                <a href="#"><i class="ion-social-snapchat"></i></a>
+                <a href="#"><i class="ion-social-twitter"></i></a>
+                <a href="#"><i class="ion-social-facebook"></i></a>
+            </div>
+            <ul class="lista">
+                <li class="lista"><a href="{{ url_for('inicio') }}">Inicio</a></li>
+                <li class="lista"><a href="{{ url_for('futbol') }}">Fútbol</a></li>
+                <li class="lista"><a href="{{ url_for('padel') }}">Padel</a></li>
+                <li class="lista"><a href="{{ url_for('tenis') }}">Tenis</a></li>
+                <li class="lista"><a href="{{ url_for('baloncesto') }}">Baloncesto</a></li>
+                <li class="lista"><a href="{{ url_for('contactanos') }}">Contactanos</a></li>
+            </ul>
+            <p class="copyright">SPORTSHOP © 2025</p>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    </div>
+</body>
+</html>

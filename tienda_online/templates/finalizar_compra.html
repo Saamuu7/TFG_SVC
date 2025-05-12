@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/finalizar_compra.css') }}">
+
+<div class="carrito-productos">
+    <h1>Pasar por caja</h1>
+    <hr>
+    <div class="productos-lista">
+        {% if carrito %}
+            {% for producto in carrito %}
+            <div class="item">
+                <div class="item-info">
+                    <div class="imagen">
+                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}">
+                    </div>
+                    <div class="descripcion">
+                        <p><strong>{{ producto.nombre }}</strong></p>
+                        <p class="precio-producto">{{ producto.precio }}€</p>
+                        <p>Talla: {{ producto.talla }}</p>
+                        <p>Cantidad: {{ producto.cantidad }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay productos en el carrito.</p>
+        {% endif %}
+    </div>
+    <div class="totales">
+        <p><strong>Total:</strong> <span id="total-carrito">0€</span></p>
+        <button id="pagar" class="btn-pagar">Pagar</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/finalizar_compra.js') }}"></script>
+
+{% endblock %}
