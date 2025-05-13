@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/finalizar_compra.css') }}">
+
+<div class="carrito-productos">
+    <h1>Pasar por caja</h1>
+    <hr>
+    
+    <div class="productos-lista">
+        {% if carrito %}
+            {% for producto in carrito %}
+            <div class="item">
+                <div class="item-info">
+                    <div class="imagen">
+                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}">
+                    </div>
+                    <div class="descripcion">
+                        <p><strong>{{ producto.nombre }}</strong></p>
+                        <p class="precio-producto">{{ producto.precio }}€</p>
+                        <p>Talla: {{ producto.talla }}</p>
+                        <p>Cantidad: {{ producto.cantidad }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay productos en el carrito.</p>
+        {% endif %}
+    </div>
+
+    <div class="totales">
+        <p><strong>Total:</strong> <span id="total-carrito">0€</span></p>
+    </div>
+
+    <form method="POST" action="{{ url_for('procesar_pago') }}">
+        <div class="row">
+            <h4>Información personal</h4>
+            <div class="input-group input-group-icon">
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <div class="input-icon"><i class="fa fa-user"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+                <input type="text" name="direccion" placeholder="Dirección" required>
+                <div class="input-icon"><i class="fa fa-home"></i></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-half">
+                <h4>Fecha de nacimiento</h4>
+                <div class="input-group">
+                    <div class="col-third"><input type="text" name="dia" placeholder="DD" required></div>
+                    <div class="col-third"><input type="text" name="mes" placeholder="MM" required></div>
+                    <div class="col-third"><input type="text" name="anio" placeholder="YYYY" required></div>
+                </div>
+            </div>
+            <div class="col-half">
+                <h4>Género</h4>
+                <div class="input-group">
+                    <input id="gender-male" type="radio" name="genero" value="male" required>
+                    <label for="gender-male">Masculino</label>
+                    <input id="gender-female" type="radio" name="genero" value="female">
+                    <label for="gender-female">Femenino</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <h4>Forma de pago</h4>
+            <div class="input-group">
+                <input id="payment-method-card" type="radio" name="metodo_pago" value="card" checked>
+                <label for="payment-method-card">
+                    <i class="fa fa-cc-visa"></i> Tarjeta de crédito
+                </label>
+
+                <input id="payment-method-paypal" type="radio" name="metodo_pago" value="paypal">
+                <label for="payment-method-paypal">
+                    <i class="fa fa-cc-paypal"></i> PayPal
+                </label>
+            </div>
+
+            <!-- Tarjeta -->
+            <div id="tarjeta-fields">
+                <div class="input-group input-group-icon">
+                    <input type="text" name="numero_tarjeta" placeholder="Número de tarjeta">
+                    <div class="input-icon"><i class="fa fa-credit-card"></i></div>
+                </div>
+                <div class="col-half">
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="cvv" placeholder="CVV">
+                        <div class="input-icon"><i class="fa fa-lock"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PayPal -->
+        <div id="paypal-fields" style="display: none;">
+            <div class="input-group input-group-icon">
+                <input type="text" name="paypal_usuario" placeholder="Usuario">
+                <div class="input-icon"><i class="fa fa-user"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+                <input type="password" name="paypal_contrasena" placeholder="Contraseña">
+                <div class="input-icon"><i class="fa fa-lock"></i></div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="row">
+            <h4>Fecha de vencimiento</h4>
+            <div class="input-group">
+                <select name="mes_vencimiento">
+                    {% for i in range(1, 13) %}
+                        <option value="{{ '%02d' % i }}">{{ '%02d' % i }}</option>
+                    {% endfor %}
+                </select>
+                <select name="anio_vencimiento">
+                    {% for i in range(2025, 2035) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <h4>Términos y condiciones</h4>
+            <div class="input-group">
+                <input id="terms" type="checkbox" name="terminos" required>
+                <label for="terms">Acepto los términos y condiciones y la política de privacidad.</label>
+            </div>
+        </div>
+
+        <div class="totales">
+            <button type="submit" class="btn-pagar">Pagar</button>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/finalizar_compra.js') }}"></script>
+{% endblock %}
