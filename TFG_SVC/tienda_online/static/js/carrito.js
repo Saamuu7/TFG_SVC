@@ -118,3 +118,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     cargarCarrito();
 });
+
+// Vaciar carrito si el usuario abandona la página, salvo que vaya a finalizar compra
+window.addEventListener('beforeunload', function (e) {
+    // Verificamos si el enlace que hizo salir al usuario fue "Finalizar Compra"
+    const linkFinalizar = document.activeElement;
+    
+    if (
+        linkFinalizar &&
+        linkFinalizar.id === 'btn-finalizar-compra'
+    ) {
+        // No vaciamos el carrito si se va a finalizar compra
+        return;
+    }
+
+    // Si no va a finalizar compra, vaciamos el carrito
+    localStorage.removeItem("carrito");
+    localStorage.removeItem("descuentoAplicado");
+});
+

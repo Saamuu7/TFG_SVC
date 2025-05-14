@@ -1,16 +1,60 @@
-.pago-finalizado {
-    text-align: center;
-    margin-top: 100px;
+/* Contenedor principal centrado */
+.contenedor-centro {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
 }
 
+/* Caja de mensaje */
+.pago-finalizado {
+    background-color: #fff;
+    padding: 20px 15px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px; /* Reducido */
+    width: 80%;  /* Ajustado */
+    animation: fadeIn 0.5s ease-in-out;
+    font-family: Arial, sans-serif;
+}
+
+/* Mensaje de éxito */
 .mensaje {
-    font-size: 40px;
-    color: green;
+    font-size: 22px; /* Reducido */
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 20px; /* Separación de la imagen */
+}
+
+/* Imagen del check verde */
+.check-imagen img {
+    width: 20px; /* Imagen más pequeña */
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Texto de número de pago */
+p {
+    font-size: 14px; /* Reducido */
+    color: #a71818;
+    margin-top: 20px;
+}
+
+p strong {
+    color: #000;
     font-weight: bold;
 }
 
-.check-imagen img {
-    width: 100px;  
-    height: auto;
-    margin-top: 20px;
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
