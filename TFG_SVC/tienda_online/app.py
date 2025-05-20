@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mysqldb import MySQL
 from functools import wraps  # <- IMPORTANTE para login_required
@@ -54,19 +54,32 @@ def login():
     if request.method == 'POST':
         name = request.form['usuario_tienda']
         password = request.form['clave_tienda']
-        
+        recordar = request.form.get('remember')  # 'on' si está marcado, None si no
+
         # Obtener el usuario de la base de datos
         usuario = Usuario.obtener_usuario_por_nombre(name)
         if usuario and check_password_hash(usuario[2], password):  # usuario[2] es la contraseña almacenada
             session['user_id'] = usuario[0]
             session['user_name'] = usuario[1]
             flash("Has iniciado sesión correctamente", "success")
-            return redirect(url_for('inicio'))
+            
+            resp = make_response(redirect(url_for('inicio')))
+            
+            if recordar == 'on':
+                # Guardamos cookie con el usuario por 30 días
+                resp.set_cookie('usuario_tienda', name, max_age=30*24*60*60)
+            else:
+                # Borramos cookie si no quiere recordar
+                resp.set_cookie('usuario_tienda', '', expires=0)
+
+            return resp
         else:
             flash("Nombre de usuario o contraseña incorrectos", "danger")
             return redirect(url_for('login'))
     
-    return render_template('login.html')
+    # Si es GET, obtenemos el usuario guardado en cookie (si existe)
+    usuario_guardado = request.cookies.get('usuario_tienda', '')
+    return render_template('login.html', usuario_guardado=usuario_guardado)
 
 # Ruta para cerrar sesión
 @app.route('/logout', methods=['POST'])
