@@ -330,3 +330,76 @@ input[type="radio"] + label:hover {
   color: white;
   border-color: #2B2D42;
 }
+
+@media only screen and (max-width: 540px) {
+  .container {
+    max-width: 95%;
+    padding: 1em 1.5em 2em 1.5em;
+  }
+
+  /* En móvil, el carrito ocupa casi todo el ancho */
+  .carrito-productos {
+    max-width: 100%;
+    margin: 10px 0;
+    padding: 0 10px;
+  }
+
+  /* El item en carrito cambia a columna y ocupa todo el ancho */
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* La info del producto se adapta para que no se vea apretado */
+  .item-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Imagen más pequeña en móvil */
+  .imagen img {
+    max-width: 80px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Eliminar margen en radios en móvil */
+  input[type="radio"] + label {
+    margin-right: 10px;
+    font-size: 14px;
+    padding: 0.8em 1.2em;
+  }
+
+  /* Botón pagar más grande y ancho completo */
+  .btn-pagar {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+  }
+
+  /* Totales centrados y con padding */
+  .totales {
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+/* Ajustes para tablets o pantallas medianas */
+@media only screen and (min-width: 541px) and (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .carrito-productos {
+    max-width: 90%;
+  }
+
+  .item {
+    flex-wrap: wrap;
+  }
+
+  .imagen img {
+    max-width: 90px;
+  }
+}

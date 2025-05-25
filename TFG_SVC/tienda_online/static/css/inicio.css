@@ -20,7 +20,6 @@ body {
     align-items: center;
 }
 
-
 @keyframes banner {
     0%, 20% {
         background-image: url('/static/img/banner1.jpg');
@@ -49,8 +48,6 @@ body {
     z-index: 1; /* Debe estar detrás de .info */
 }
 
-
-
 .info {
     z-index: 2; /* Asegura que esté por encima */
     text-align: center;
@@ -58,7 +55,6 @@ body {
     width: 100%;
     position: relative; /* Asegura que no se vea afectado por flex */
 }
-
 
 .info h1 {
     color: #ffffff;
@@ -83,7 +79,7 @@ body {
 }
 
 /* Cajas(2) */
-.container{
+.container {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -92,7 +88,8 @@ body {
     max-width: 1100px;
     margin: auto;
 }
-.box{
+
+.box {
     width: 500px;
     height: 400px;
     position: relative;
@@ -101,12 +98,14 @@ body {
     border-radius: 6px;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 }
-.box img{
+
+.box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.capa{
+
+.capa {
     position: absolute;
     top: 0;
     left: 0;
@@ -120,11 +119,13 @@ body {
     transform: scale(0);
     transition: .3s ease;
 }
-.box:hover .capa{
+
+.box:hover .capa {
     transform: scale(1);
 }
-@media only screen and (max-width:900px){
-    .container{
+
+@media only screen and (max-width:900px) {
+    .container {
         width: 90%;
         margin: auto;
         flex-wrap: wrap;
@@ -139,6 +140,7 @@ body {
 .redes-sociales {
   width: 100%;
 }
+
 .container2 {
   max-width: 1150px;
   margin: auto;
@@ -147,19 +149,23 @@ body {
   color: #7a7a7a;
   line-height: 1.7;
 }
+
 .titulo {
   max-width: 600px;
   margin: auto;
   margin-bottom: 60px;
 }
+
 .titulo h1 {
   margin-bottom: 25px;
 }
+
 .content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 55px;
 }
+
 .box2 figure {
   width: 100%;
   height: 250px;
@@ -168,6 +174,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .box2 figure img {
   width: 90%;
   height: 90%;
@@ -184,8 +191,9 @@ body {
     display: flex;
     max-width: 1100px;
     margin: auto;
-  }
-  .title-cards {
+}
+
+.title-cards {
     width: 100%;
     max-width: 1080px;
     margin: auto;
@@ -193,8 +201,9 @@ body {
     margin-top: 20px;
     text-align: center;
     color: #7a7a7a;
-  }
-  .card {
+}
+
+.card {
     width: 100%;
     margin: 20px;
     border-radius: 6px;
@@ -203,49 +212,74 @@ body {
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     transition: all 400ms ease-out;
     cursor: default;
-  }
-  .card:hover {
+}
+
+.card:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
     transform: translateY(-3%);
-  }
-  .card img {
+}
+
+.card img {
     width: 100%;
     height: 210px;
-  }
-  .card .contenido-card {
+}
+
+.card .contenido-card {
     padding: 15px;
     text-align: center;
-  }
-  .card .contenido-card h3 {
+}
+
+.card .contenido-card h3 {
     margin-bottom: 15px;
     color: #7a7a7a;
-  }
-  .card .contenido-card p {
+}
+
+.card .contenido-card p {
     line-height: 1.8;
     color: #6a6a6a;
     font-size: 14px;
     margin-bottom: 5px;
-  }
-  .card .contenido-card a {
+}
+
+.card .contenido-card a.btn-inscribirse {
     display: inline-block;
-    padding: 10px;
+    padding: 10px 25px;
     margin-top: 10px;
-    text-decoration: none;
-    color: #8D99AE;
-    border: 1px solid #8D99AE;
-    border-radius: 4px;
-    transition: all 400ms ease;
-    margin-bottom: 5px;
-  }
-  .card .contenido-card a:hover {
+    font-size: 14px;
+    font-weight: 600;
+    color: #EDF2F4;                /* Texto blanco */
+    background-color: #8D99AE;  /* Gris */
+    border: none;
+    border-radius: 6px;         /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;      /* Quitar subrayado */
+    user-select: none;
+}
+
+.card .contenido-card a.btn-inscribirse:hover {
+    background-color: #6b7482;  /* Gris oscuro al pasar el mouse */
+    color: #fff;
+}
+
+.card .contenido-card a:hover {
     background: #8D99AE;
     color: #fff;
-  }
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
     .container-card {
       flex-wrap: wrap;
     }
     .card {
       margin: 15px;
     }
-  }
+}
+
+.btn-inscribirse.inscrito {
+    background-color: green !important;
+    color: white !important;
+    pointer-events: none; /* Para que no se pueda volver a clicar */
+    cursor: default;
+}

@@ -1,7 +1,13 @@
 /* Estilos generales */
-body {
+body, html {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
     padding-top: 20px; /* Ajuste para reducir el margen superior */
 }
 
@@ -44,6 +50,24 @@ header {
     width: 25px;
 }
 
+/* Contador carrito */
+.carrito-icono {
+    position: relative;
+}
+
+#contador-carrito {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    display: none; /* Mostrarlo solo cuando haya items */
+}
+
+/* Navegación */
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -51,6 +75,7 @@ nav ul {
     padding-bottom: 10px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -116,6 +141,9 @@ nav ul li a:hover::after {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .footer li {
@@ -149,6 +177,7 @@ nav ul li a:hover::after {
     margin: 0 8px;
     color: inherit;
     opacity: 0.75;
+    transition: opacity 0.3s ease;
 }
 
 .footer .social > a:hover {
@@ -167,3 +196,105 @@ nav ul li a:hover::after {
     margin-bottom: 0;
 }
 
+/* MEDIA QUERIES para responsive */
+
+/* Tablets y móviles grandes */
+@media screen and (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .logo {
+        max-width: 120px;
+    }
+    
+    .icon img {
+        width: 22px;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        margin: 10px 0 0 0;
+        padding-bottom: 0;
+    }
+    
+    nav ul li {
+        margin: 8px 0;
+    }
+    
+    nav ul li a {
+        font-size: 16px;
+        padding: 8px;
+    }
+    
+    .footer ul {
+        flex-direction: column;
+        font-size: 16px;
+    }
+    
+    .footer li {
+        padding: 6px 0;
+    }
+    
+    .footer .social > a {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 20px;
+        margin: 0 6px;
+    }
+}
+
+/* Móviles pequeños */
+@media screen and (max-width: 480px) {
+    body {
+        padding-top: 15px;
+    }
+    
+    main {
+        padding-top: 100px;
+    }
+    
+    .header-content {
+        padding: 0 5px;
+    }
+    
+    .logo {
+        max-width: 100px;
+    }
+    
+    .icon img {
+        width: 18px;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 6px;
+    }
+    
+    nav ul li {
+        margin: 6px 0;
+    }
+    
+    .footer ul {
+        font-size: 14px;
+    }
+    
+    .footer li {
+        padding: 4px 0;
+    }
+    
+    .footer .social > a {
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 18px;
+        margin: 0 5px;
+    }
+    
+    .footer .copyright {
+        font-size: 12px;
+    }
+}

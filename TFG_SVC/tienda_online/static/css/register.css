@@ -139,3 +139,31 @@ button.btn:hover {
     color: #fff; /* Color blanco para el texto */
     font-size: 14px;
 }
+
+/* Extra: Adaptación a pantallas pequeñas */
+@media (max-width: 480px) {
+    .wrapper {
+        width: 100%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    button.btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .forget {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .register p {
+        font-size: 13px;
+    }
+}
+

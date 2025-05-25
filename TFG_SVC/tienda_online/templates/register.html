@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,9 @@
 </head>
 <body>
   <div class="wrapper">
-    <form method="POST" action="{{ url_for('register') }}">
+    <form method="POST" action="{{ url_for('register') }}" autocomplete="off">
       <h2>Registrarse</h2>
+
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           <ul class="flashes">
@@ -20,24 +21,28 @@
         {% endif %}
       {% endwith %}
 
-        <div class="input-field">
+      <div class="input-field">
         <input type="text" name="name" required>
-        <label>usuario</label>
+        <label>Usuario</label>
       </div>
+
       <div class="input-field">
         <input type="password" name="password" required>
-        <label>contraseña</label>
+        <label>Contraseña</label>
       </div>
+
       <div class="forget">
         <label for="remember">
           <input type="checkbox" id="remember">
           <p>Recordar</p>
         </label>
       </div>
+
       <button type="submit" class="btn">Registrarse</button>
+
       <div class="register">
-        <p>Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia Sesion</a></p>
-    </div>
+        <p>¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a></p>
+      </div>
     </form>
   </div>
 </body>

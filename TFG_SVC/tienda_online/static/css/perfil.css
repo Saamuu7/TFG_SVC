@@ -391,6 +391,90 @@ button[type="submit"] {
     background-color: #45a049; /* Cambio de color a un azul más oscuro */
 }
 
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+        margin: 20px auto;
+        max-width: 100%;
+    }
 
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
 
+    .config-content {
+        margin-left: 0;
+        width: 100%;
+    }
 
+    .profile-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-name {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .config-title {
+        font-size: 20px;
+    }
+
+    button[type="submit"],
+    #save-payment-btn,
+    #payment-form button[type="button"],
+    .delete-account-btn,
+    .logout-btn,
+    .delete-payment-btn,
+    .btn-guardar-v-p {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Para pantallas menores o iguales a 480px (móviles pequeños) */
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .profile-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-name {
+        font-size: 16px;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .sidebar {
+        padding: 10px;
+    }
+
+    .config-option {
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    #payment-form input {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

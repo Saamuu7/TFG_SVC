@@ -13,6 +13,7 @@ body {
     min-height: 100vh;
     width: 100%;
     padding: 0 10px;
+    position: relative; /* necesario para el ::before */
 }
 
 body::before {
@@ -23,10 +24,12 @@ body::before {
     background: url('/static/img/forms.jpg');
     background-position: center;
     background-size: cover;
+    z-index: -1;
 }
 
 .wrapper {
-    width: 400px;
+    width: 100%;
+    max-width: 400px; /* máximo de 400px, pero adaptable */
     border-radius: 8px;
     padding: 30px;
     text-align: center;
@@ -82,10 +85,19 @@ h2 {
 
 .forget {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
     margin: 25px 0 35px 0;
     color: #fff;
+    gap: 10px;
+}
+
+@media (min-width: 500px) {
+    .forget {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 #remember {
@@ -101,10 +113,9 @@ h2 {
     margin-left: 8px;
 }
 
-/* Estilos para el botón "Iniciar Sesión" */
 button.btn {
-    background: #ffffff; /* Fondo blanco para el botón */
-    color: #000000; /* Color de texto negro */
+    background: #ffffff;
+    color: #000000;
     font-weight: 600;
     padding: 12px 20px;
     cursor: pointer;
@@ -115,15 +126,15 @@ button.btn {
     text-align: center;
     text-decoration: none;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 button.btn:hover {
-    background: transparent; /* Fondo transparente en hover */
-    border-color: #fff; /* Cambia el borde al pasar el ratón */
-    color: #fff; /* Cambia el color de texto a blanco */
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
 }
 
-/* Estilos para los enlaces "Registrarse" */
 .register a {
     color: #fff;
     text-decoration: none;
@@ -134,8 +145,7 @@ button.btn:hover {
     text-decoration: underline;
 }
 
-/* Estilos para el texto "No tienes cuenta" */
 .register p {
-    color: #fff; /* Color blanco para el texto */
+    color: #fff;
     font-size: 14px;
 }

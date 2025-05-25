@@ -145,6 +145,7 @@ def agregar_tarjeta():
 def inicio():
     return render_template('inicio.html')
 
+
 @app.route('/futbol')
 @login_required
 def futbol():
@@ -223,11 +224,6 @@ def padel():
     cur.close()
     return render_template('padel.html', productos=productos_info)
 
-@app.route('/tenis')
-@login_required
-def tenis():
-    return render_template('tenis.html')
-
 @app.route('/baloncesto')
 @login_required
 def baloncesto():
@@ -302,7 +298,7 @@ def procesar_pago():
             # Si hubo un error, mostramos un mensaje de error
             return render_template('error.html', mensaje=resultado['message'])
 
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
+
+

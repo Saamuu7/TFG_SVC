@@ -50,3 +50,39 @@ function agregarAlCarrito(nombre, precio, talla, imagen) {
     // Actualizar el contador
     actualizarContadorCarrito(); // 👈 Llamada para actualizar contador
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botones = document.querySelectorAll(".btn-inscribirse");
+
+  // Función para guardar inscripción con fecha de expiración (1 semana)
+  function guardarInscripcion(id) {
+    const expiracion = new Date().getTime() + 7 * 24 * 60 * 60 * 1000; // 1 semana en ms
+    localStorage.setItem(`inscrito_${id}`, expiracion);
+  }
+
+  // Función para verificar si la inscripción sigue vigente
+  function estaInscrito(id) {
+    const expiracion = localStorage.getItem(`inscrito_${id}`);
+    if (!expiracion) return false;
+    return new Date().getTime() < parseInt(expiracion);
+  }
+
+  botones.forEach((boton, index) => {
+    // Usa un id para cada botón. Aquí uso el índice, pero puedes usar otro identificador único
+    const botonId = index;
+
+    // Al cargar la página, verifica si el botón está "inscrito"
+    if (estaInscrito(botonId)) {
+      boton.classList.add("inscrito");
+      boton.innerText = "¡Inscrito!";
+    }
+
+    boton.addEventListener("click", function(event) {
+      event.preventDefault();
+      guardarInscripcion(botonId);
+      this.classList.add("inscrito");
+      this.innerText = "¡Inscrito!";
+    });
+  });
+});
+

@@ -159,3 +159,37 @@ class Pago:
         except Exception as e:
             return {'success': False, 'message': f'Error al obtener el pago: {str(e)}'}, 500
 
+# Clase para interactuar con la tabla 'inscripciones'
+class Inscripcion:
+    @staticmethod
+    def agregar_inscripcion(id_usuario, puesto):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO inscripciones (id_usuario, puesto) VALUES (%s, %s)", (id_usuario, puesto))
+            mysql.connection.commit()
+            cur.close()
+            return {'success': True, 'message': 'Inscripción registrada exitosamente'}, 200
+        except Exception as e:
+            return {'success': False, 'message': f'Error al registrar la inscripción: {str(e)}'}, 500
+
+    @staticmethod
+    def obtener_inscripciones_por_usuario(id_usuario):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM inscripciones WHERE id_usuario = %s", (id_usuario,))
+            inscripciones = cur.fetchall()
+            cur.close()
+            return inscripciones
+        except Exception as e:
+            return {'success': False, 'message': f'Error al obtener inscripciones: {str(e)}'}, 500
+
+    @staticmethod
+    def eliminar_inscripcion(id_inscripcion):
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM inscripciones WHERE id = %s", (id_inscripcion,))
+            mysql.connection.commit()
+            cur.close()
+            return {'success': True, 'message': 'Inscripción eliminada exitosamente'}, 200
+        except Exception as e:
+            return {'success': False, 'message': f'Error al eliminar la inscripción: {str(e)}'}, 500

@@ -1,3 +1,4 @@
+/* BASE (tu CSS original) */
 body {
     background-color: #EDF2F4;
     margin: 0;
@@ -98,4 +99,72 @@ iframe {
     height: 250px;
     border: none;
     border-radius: 10px;
+}
+
+/* =========================== */
+/* RESPONSIVE (añadido)         */
+/* =========================== */
+
+@media (max-width: 700px) {
+  .contacto-container {
+    flex-direction: column;
+    max-width: 95%;
+    padding: 20px;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  form {
+    margin-top: 0;
+  }
+
+  .info-contacto {
+    margin-top: 0;
+    padding: 20px;
+  }
+
+  form h2 {
+    font-size: 24px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button[type="submit"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  iframe {
+    height: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .contacto-container {
+    padding: 15px;
+    gap: 20px;
+  }
+
+  form h2 {
+    font-size: 20px;
+  }
+
+  input,
+  textarea {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  button[type="submit"] {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  iframe {
+    height: 180px;
+  }
 }

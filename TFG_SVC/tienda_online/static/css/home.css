@@ -41,3 +41,24 @@ html, body {
     z-index: 1;
     margin-top: 78vh; /* Baja el botón hacia la parte inferior */
 }
+
+/* MEDIA QUERIES para hacer responsive */
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .inicio-button {
+        font-size: 16px;
+        padding: 8px 16px;
+        margin-top: 85vh; /* Más cerca del borde inferior */
+    }
+}
+
+/* Para tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+    .inicio-button {
+        font-size: 17px;
+        padding: 9px 18px;
+        margin-top: 80vh;
+    }
+}
+
